@@ -1,5 +1,5 @@
 import com.typesafe.sbt.SbtLicenseReport.autoImport._
-import de.heikoseeberger.sbtheader.HeaderPlugin.autoImport.{HeaderLicense, headerLicense}
+import de.heikoseeberger.sbtheader.HeaderPlugin.autoImport.{HeaderLicense, HeaderLicenseStyle, headerLicense}
 import sbt.Keys._
 import sbt._
 
@@ -25,7 +25,9 @@ object DefaultSettingsPlugin extends AutoPlugin {
 
   def sbtHeaderSettings: Seq[Def.Setting[_]] = Seq(
     // keep consistent with ReleaseSettings.licenses
-    headerLicense := Some(HeaderLicense.MIT(CommonValues.startYear.toString, CommonValues.organizationName))
+    headerLicense := Some(
+      HeaderLicense.MIT(CommonValues.startYear.toString, CommonValues.organizationName, HeaderLicenseStyle.SpdxSyntax)
+    )
   )
 
   def sbtLicenseReportSettings: Seq[Def.Setting[_]] = Seq(
@@ -58,7 +60,7 @@ object DefaultSettingsPlugin extends AutoPlugin {
       "-Xlint:constant", // Evaluation of a constant arithmetic expression results in an error.
       "-Xlint:delayedinit-select", // Selecting member of DelayedInit.
       "-Xlint:doc-detached", // A Scaladoc comment appears to be detached from its element.
-      "-Xlint:inaccessible",  // Inaccessible types in method signatures.
+      "-Xlint:inaccessible", // Inaccessible types in method signatures.
       "-Xlint:infer-any", // Warn when a type argument is inferred to be `Any`.
       "-Xlint:missing-interpolator", // A string literal appears to be missing an interpolator id.
       "-Xlint:nullary-override", // Warn when non-nullary `def f()' overrides nullary `def f'.
