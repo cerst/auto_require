@@ -1,4 +1,3 @@
-import com.typesafe.sbt.SbtLicenseReport.autoImport._
 import de.heikoseeberger.sbtheader.HeaderPlugin.autoImport.{HeaderLicense, HeaderLicenseStyle, headerLicense}
 import sbt.Keys._
 import sbt._
@@ -11,7 +10,6 @@ object DefaultSettingsPlugin extends AutoPlugin {
   // in the following, organizationName and startYear would also be required by sbt-header to generate ready-made license headers
   override lazy val projectSettings: Seq[Def.Setting[_]] = {
     sbtHeaderSettings ++
-      sbtLicenseReportSettings ++
       scalacSettings ++
       versionToFileTaskSettings ++
       Seq(
@@ -28,14 +26,6 @@ object DefaultSettingsPlugin extends AutoPlugin {
     headerLicense := Some(
       HeaderLicense.MIT(CommonValues.startYear.toString, CommonValues.organizationName, HeaderLicenseStyle.SpdxSyntax)
     )
-  )
-
-  def sbtLicenseReportSettings: Seq[Def.Setting[_]] = Seq(
-    // The ivy configurations we'd like to grab licenses for.
-    licenseConfigurations := Set(Compile, Provided).map(_.name),
-    licenseReportStyleRules := Some("table, th, td {border: 1px solid black;}"),
-    licenseReportTitle := normalizedName.value,
-    licenseReportTypes := Seq(MarkDown)
   )
 
   // these settings are based on:
