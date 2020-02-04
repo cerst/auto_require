@@ -1,3 +1,9 @@
+/*
+ * Copyright 2020 Constantin Gerstberger
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 package com.github.cerst.auto_require.internal
 
 object Precedence {
