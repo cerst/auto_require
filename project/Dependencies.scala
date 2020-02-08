@@ -17,12 +17,12 @@ object Dependencies {
     // Apache-2.0
     val Newtype = "io.estatico" %% "newtype" % Version.Newtype
     // Apache-2.0
-    val ScalaReflect = "org.scala-lang" % "scala-reflect" % CommonValues.scalaVersion
-    // Apache-2.0
     val Scalatest = "org.scalatest" %% "scalatest" % Version.Scalatest
     // Apache-2.0
     // always only used for compilation
     val SilencerLib = "com.github.ghik" % "silencer-lib" % Version.Silencer % Provided cross CrossVersion.full
+    // Apache-2.0
+    def scalaReflect(scalaVersionValue: String) = "org.scala-lang" % "scala-reflect" % scalaVersionValue
   }
 
   object CompilerPlugin {
@@ -33,20 +33,20 @@ object Dependencies {
   }
 
   def core(scalaVersionValue: String): Seq[ModuleID] = {
-    val common = Seq(
+    val cross = Seq(
       CompilerPlugin.Silencer,
       Library.Newtype % Test,
-      Library.ScalaReflect,
       Library.Scalatest % Test,
-      Library.SilencerLib
+      Library.SilencerLib,
+      Library.scalaReflect(scalaVersionValue)
     )
-    val versionSpecific = CrossVersion.partialVersion(scalaVersionValue) match {
+    val specific = CrossVersion.partialVersion(scalaVersionValue) match {
       // required for tests with newtype
       // https://github.com/estatico/scala-newtype
       case Some((2, 12)) => Seq(CompilerPlugin.Paradise)
       case _             => Seq()
     }
-    common ++ versionSpecific
+    cross ++ specific
   }
 
 }
