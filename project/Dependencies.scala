@@ -13,7 +13,7 @@ object Dependencies {
 
   // comment licenses for dependencies using the SPDX short identifier (see e.g. https://opensource.org/licenses/Apache-2.0)
   // rationale: double check the license when adding a new library avoid having to remove a problematic one later on when it is in use and thus hard to remove
-  object Library {
+  private object Library {
     // Apache-2.0
     val Newtype = "io.estatico" %% "newtype" % Version.Newtype
     // Apache-2.0
@@ -25,7 +25,7 @@ object Dependencies {
     def scalaReflect(scalaVersionValue: String) = "org.scala-lang" % "scala-reflect" % scalaVersionValue
   }
 
-  object CompilerPlugin {
+  private object CompilerPlugin {
     // BSD-3-Clause
     val Paradise = compilerPlugin("org.scalamacros" % "paradise" % Version.Paradise cross CrossVersion.full)
     // Apache-2.0
