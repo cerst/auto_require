@@ -32,7 +32,7 @@ while true; do
     read yn
         case ${yn} in
             [Yy]* ) break;;
-            [Nn]* ) echo "Aborted" exit 0;;
+            [Nn]* ) echo "Aborted"; exit 0;;
             * ) echo "Please answer yes or no.";;
         esac
 done
