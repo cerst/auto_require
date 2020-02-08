@@ -7,7 +7,7 @@ object Dependencies {
   private object Version {
     val Newtype = "0.4.3"
     val Paradise = "2.1.1"
-    val Scalatest = "3.0.8"
+    val Scalatest = "3.1.0"
     val Silencer = "1.4.4"
   }
 

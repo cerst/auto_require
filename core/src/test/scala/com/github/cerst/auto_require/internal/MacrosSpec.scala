@@ -10,11 +10,12 @@ import java.time.Instant
 
 import com.github.cerst.auto_require.{InfixOnlyOperators, autoRequireEither}
 import org.scalactic.TypeCheckedTripleEquals
-import org.scalatest.{EitherValues, FreeSpec}
+import org.scalatest.EitherValues
+import org.scalatest.freespec.AnyFreeSpec
 
 import scala.util.matching.Regex
 
-final class MacrosSpec extends FreeSpec with TypeCheckedTripleEquals with EitherValues {
+final class MacrosSpec extends AnyFreeSpec with TypeCheckedTripleEquals with EitherValues {
 
   import MacrosSpec._
 

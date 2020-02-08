@@ -7,11 +7,12 @@
 package com.github.cerst.auto_require.internal
 
 import org.scalactic.TypeCheckedTripleEquals
-import org.scalatest.{Assertions, EitherValues, FreeSpec}
+import org.scalatest.freespec.AnyFreeSpec
+import org.scalatest.{Assertions, EitherValues}
 
 import scala.reflect.runtime.universe.{WeakTypeTag, weakTypeTag}
 
-final class DeriveSimpleNameSpec extends FreeSpec with Assertions with TypeCheckedTripleEquals with EitherValues {
+final class DeriveSimpleNameSpec extends AnyFreeSpec with Assertions with TypeCheckedTripleEquals with EitherValues {
 
   import DeriveSimpleNameSpec._
 

@@ -8,11 +8,12 @@ package com.github.cerst.auto_require
 
 import io.estatico.newtype.macros.newtype
 import io.estatico.newtype.ops._
-import org.scalatest.{Assertions, FreeSpec}
+import org.scalatest.Assertions
+import org.scalatest.freespec.AnyFreeSpec
 
 import scala.util.control.NoStackTrace
 
-final class IntegrationSpec extends FreeSpec with Assertions {
+final class IntegrationSpec extends AnyFreeSpec with Assertions {
 
   import IntegrationSpec._
 
