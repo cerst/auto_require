@@ -8,9 +8,9 @@ object CommonValues {
   val connection = "git@github.com:cerst/auto_require.git"
   val homepage = url("https://github.com/cerst/auto_require")
   val organizationName = "Constantin Gerstberger"
-  val scalaVersion = "2.12.10"
+  val scalaVersion = "2.13.1"
   val startYear = 2020
 
-  val crossScalaVersions = List(scalaVersion, "2.13.1")
+  val crossScalaVersions = List(scalaVersion, "2.12.10")
 
 }

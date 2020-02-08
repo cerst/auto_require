@@ -1,7 +1,7 @@
 /*
  * Copyright 2020 Constantin Gerstberger
  *
- * SPDX-License-Identifier: MIT
+ * SPDX-License-Identifier: Apache-2.0
  */
 
 package com.github.cerst.auto_require.internal
@@ -27,22 +27,22 @@ final class DeriveSimpleNameSpec extends FreeSpec with Assertions with TypeCheck
     val actual_1 = DeriveSimpleName(rawFullNameOf[NameSubject], 1, stripTypeNameSuffix = false)
     val actual_2 = DeriveSimpleName(rawFullNameOf[NameSubject], 1, stripTypeNameSuffix = true)
     assert(actual_1 == actual_2)
-    assert(actual_2.right.value === "NameSubject")
+    assert(actual_2 contains "NameSubject")
   }
 
   "2 segments" in {
     val actual_1 = DeriveSimpleName(rawFullNameOf[NameSubject], 2, stripTypeNameSuffix = false)
     val actual_2 = DeriveSimpleName(rawFullNameOf[NameSubject], 2, stripTypeNameSuffix = true)
     assert(actual_1 == actual_2)
-    assert(actual_2.right.value === "DeriveSimpleNameSpec.NameSubject")
+    assert(actual_2 contains "DeriveSimpleNameSpec.NameSubject")
   }
 
   "strip 'Type' suffix" in {
     assert(rawFullNameOf[Type].endsWith(".Type"))
-    assert(DeriveSimpleName(rawFullNameOf[Type], 1, stripTypeNameSuffix = false).right.value === "Type")
-    assert(DeriveSimpleName(rawFullNameOf[Type], 1, stripTypeNameSuffix = true).right.value === "DeriveSimpleNameSpec")
+    assert(DeriveSimpleName(rawFullNameOf[Type], 1, stripTypeNameSuffix = false) contains "Type")
+    assert(DeriveSimpleName(rawFullNameOf[Type], 1, stripTypeNameSuffix = true) contains "DeriveSimpleNameSpec")
     assert(
-      DeriveSimpleName(rawFullNameOf[Type], 2, stripTypeNameSuffix = true).right.value === "internal.DeriveSimpleNameSpec"
+      DeriveSimpleName(rawFullNameOf[Type], 2, stripTypeNameSuffix = true) contains "internal.DeriveSimpleNameSpec"
     )
   }
 

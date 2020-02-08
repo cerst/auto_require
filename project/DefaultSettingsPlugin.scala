@@ -10,21 +10,21 @@ object DefaultSettingsPlugin extends AutoPlugin {
   // in the following, organizationName and startYear would also be required by sbt-header to generate ready-made license headers
   override lazy val projectSettings: Seq[Def.Setting[_]] = {
     sbtHeaderSettings ++
-      scalacSettings ++
       versionToFileTaskSettings ++
       Seq(
         organization := "com.github.cerst",
         organizationName := CommonValues.organizationName,
-        resolvers ++= Dependencies.resolvers,
+        resolvers ++= Dependencies.additionalResolvers,
         scalaVersion := CommonValues.scalaVersion,
         startYear := Some(CommonValues.startYear)
-      )
+      ) ++
+      scalacSettings
   }
 
   def sbtHeaderSettings: Seq[Def.Setting[_]] = Seq(
     // keep consistent with ReleaseSettings.licenses
     headerLicense := Some(
-      HeaderLicense.MIT(CommonValues.startYear.toString, CommonValues.organizationName, HeaderLicenseStyle.SpdxSyntax)
+      HeaderLicense.ALv2(CommonValues.startYear.toString, CommonValues.organizationName, HeaderLicenseStyle.SpdxSyntax)
     )
   )
 
@@ -79,6 +79,13 @@ object DefaultSettingsPlugin extends AutoPlugin {
     // "Note that the REPL can’t really cope with -Ywarn-unused:imports or -Xfatal-warnings so you should turn them off for the console."
     scalacOptions in (Compile, console) ~= (_.filterNot(Set("-Ywarn-unused:imports", "-Xfatal-warnings")))
   )
+
+  /*
+  CrossVersion.partialVersion(scalaVersion) match {
+         case Some((2, scalaMajor)) if scalaMajor == 9 => Nil
+         case _ => Seq("-language:_")
+       }
+   */
 
   lazy val versionToFile = taskKey[Unit]("Print the version into /target/version-to-file/version")
 

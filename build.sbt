@@ -13,6 +13,12 @@ lazy val core = (project in file("core"))
   .settings(
     ReleaseSettings.libraryOptimized("com.github.cerst.auto_require"),
     crossScalaVersions := CommonValues.crossScalaVersions,
-    libraryDependencies ++= Dependencies.coreLibraries,
-    name := "auto_require"
+    libraryDependencies ++= Dependencies.core(scalaVersion.value),
+    name := "auto_require",
+    scalacOptions ++= (CrossVersion.partialVersion(scalaVersion.value) match {
+      // required for tests with newtype
+      // https://github.com/estatico/scala-newtype
+      case Some((2, 13)) => Seq("-Ymacro-annotations")
+      case _             => Seq()
+    })
   )
