@@ -80,13 +80,6 @@ object DefaultSettingsPlugin extends AutoPlugin {
     scalacOptions in (Compile, console) ~= (_.filterNot(Set("-Ywarn-unused:imports", "-Xfatal-warnings")))
   )
 
-  /*
-  CrossVersion.partialVersion(scalaVersion) match {
-         case Some((2, scalaMajor)) if scalaMajor == 9 => Nil
-         case _ => Seq("-language:_")
-       }
-   */
-
   lazy val versionToFile = taskKey[Unit]("Print the version into /target/version-to-file/version")
 
   def versionToFileTaskSettings: Seq[Def.Setting[_]] = Seq(
