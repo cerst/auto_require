@@ -35,16 +35,7 @@ final class MacrosSpec extends AnyFreeSpec with TypeCheckedTripleEquals with Eit
     val birthday = Instant.parse("2000-03-31T10:50:49Z")
     val actual = autoRequireEither[Person](!(age < 6) && birthday.compareTo(Instant.MAX) <= 0).left.value
     val expected =
-      """Requirement failed for 'Person':
-        |  !(age < 6) && birthday.compareTo(java.time.Instant.MAX) <= 0 = false
-        |    !(age < 6) = false
-        |      age < 6 = true
-        |        age = 5
-        |    birthday.compareTo(java.time.Instant.MAX) <= 0 = true
-        |      birthday.compareTo(java.time.Instant.MAX) = -1
-        |        birthday = 2000-03-31T10:50:49Z
-        |        java.time.Instant.MAX = +1000000000-12-31T23:59:59.999999999Z""".stripMargin
-
+      "Requirement failed for 'Person': '!(age < 6) && birthday.compareTo(java.time.Instant.MAX) <= 0' { age = 5, birthday = 2000-03-31T10:50:49Z, java.time.Instant.MAX = +1000000000-12-31T23:59:59.999999999Z }"
     assert(actual === expected)
   }
 
@@ -54,16 +45,7 @@ final class MacrosSpec extends AnyFreeSpec with TypeCheckedTripleEquals with Eit
     val actual =
       autoRequireEither[Person](!(age < 6) && birthday.compareTo(Instant.MAX) <= 0, InfixOnlyOperators(false)).left.value
     val expected =
-      """Requirement failed for 'Person':
-        |  !(age < 6) && (birthday compareTo java.time.Instant.MAX) <= 0 = false
-        |    !(age < 6) = false
-        |      age < 6 = true
-        |        age = 5
-        |    (birthday compareTo java.time.Instant.MAX) <= 0 = true
-        |      birthday compareTo java.time.Instant.MAX = -1
-        |        birthday = 2000-03-31T10:50:49Z
-        |        java.time.Instant.MAX = +1000000000-12-31T23:59:59.999999999Z""".stripMargin
-
+      "Requirement failed for 'Person': '!(age < 6) && (birthday compareTo java.time.Instant.MAX) <= 0' { age = 5, birthday = 2000-03-31T10:50:49Z, java.time.Instant.MAX = +1000000000-12-31T23:59:59.999999999Z }"
     assert(actual === expected)
   }
 
@@ -73,16 +55,7 @@ final class MacrosSpec extends AnyFreeSpec with TypeCheckedTripleEquals with Eit
     val birthday = Instant.parse("2000-03-31T10:50:49Z")
     val actual = autoRequireEither[Person](!(age < 6) && birthday <= Instant.MAX).left.value
     val expected =
-      """Requirement failed for 'Person':
-        |  !(age < 6) && InstantOps(birthday) <= java.time.Instant.MAX = false
-        |    !(age < 6) = false
-        |      age < 6 = true
-        |        age = 5
-        |    InstantOps(birthday) <= java.time.Instant.MAX = true
-        |      InstantOps(birthday) = com.github.cerst.auto_require.internal.InstantOps@38e48309
-        |        birthday = 2000-03-31T10:50:49Z
-        |      java.time.Instant.MAX = +1000000000-12-31T23:59:59.999999999Z""".stripMargin
-
+      "Requirement failed for 'Person': '!(age < 6) && InstantOps(birthday) <= java.time.Instant.MAX' { age = 5, birthday = 2000-03-31T10:50:49Z, java.time.Instant.MAX = +1000000000-12-31T23:59:59.999999999Z }"
     assert(actual === expected)
   }
 
@@ -90,14 +63,8 @@ final class MacrosSpec extends AnyFreeSpec with TypeCheckedTripleEquals with Eit
     import NestedInstantOps._
     val birthday = Instant.parse("2000-03-31T10:50:49Z")
     val actual = autoRequireEither[Person](birthday > Instant.MAX).left.value
-    // replace is a workaround
-    // you can't have a '$' inside quotes without getting a warning concerning a potentially missing interpolator
     val expected =
-      """Requirement failed for 'Person':
-      |  MacrosSpec.NestedInstantOps(birthday) > java.time.Instant.MAX = false
-      |    MacrosSpec.NestedInstantOps(birthday) = com.github.cerst.auto_require.internal.MacrosSpec\Dollar\NestedInstantOps@38e48309
-      |      birthday = 2000-03-31T10:50:49Z
-      |    java.time.Instant.MAX = +1000000000-12-31T23:59:59.999999999Z""".stripMargin.replace("""\Dollar\""", "$")
+      "Requirement failed for 'Person': 'MacrosSpec.NestedInstantOps(birthday) > java.time.Instant.MAX' { birthday = 2000-03-31T10:50:49Z, java.time.Instant.MAX = +1000000000-12-31T23:59:59.999999999Z }"
 
     assert(actual === expected)
   }
@@ -107,12 +74,7 @@ final class MacrosSpec extends AnyFreeSpec with TypeCheckedTripleEquals with Eit
     val input = "hello"
     val actual = autoRequireEither[Person](regex.pattern.matcher(input).matches())
     val expected =
-      """Requirement failed for 'Person':
-        |  regex.pattern.matcher(input).matches() = false
-        |    regex.pattern.matcher(input) = java.util.regex.Matcher[pattern=\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3} region=0,5 lastmatch=]
-        |      regex.pattern = \d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}
-        |      input = hello""".stripMargin
-
+      """Requirement failed for 'Person': 'regex.pattern.matcher(input).matches()' { regex.pattern = \d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}, input = hello }"""
     assert(actual.left.value === expected)
   }
 
@@ -122,12 +84,7 @@ final class MacrosSpec extends AnyFreeSpec with TypeCheckedTripleEquals with Eit
     val input = "hello"
     val actual = autoRequireEither[Person](input.matches(regex))
     val expected =
-      """Requirement failed for 'Person':
-        |  RegexOps(input).matches(regex) = false
-        |    RegexOps(input) = com.github.cerst.auto_require.internal.RegexOps@5e918d2
-        |      input = hello
-        |    regex = \d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}""".stripMargin
-
+      """Requirement failed for 'Person': 'RegexOps(input).matches(regex)' { input = hello, regex = \d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3} }"""
     assert(actual.left.value === expected)
   }
 
