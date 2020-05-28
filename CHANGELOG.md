@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0
+* Change artifact name to _auto-require_ ('-' rather than '_')
+* Change package name to _autorequire_ (remove '_')
+
 ## 0.2.0
 * Error messages
   * no longer contain evaluated sub-expressions (but still all variables)
