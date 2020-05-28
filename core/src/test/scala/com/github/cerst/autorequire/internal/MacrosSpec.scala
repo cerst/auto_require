@@ -4,11 +4,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package com.github.cerst.auto_require.internal
+package com.github.cerst.autorequire.internal
 
 import java.time.Instant
 
-import com.github.cerst.auto_require.{InfixOnlyOperators, autoRequireEither}
+import com.github.cerst.autorequire.{InfixOnlyOperators, autoRequireEither}
 import org.scalactic.TypeCheckedTripleEquals
 import org.scalatest.EitherValues
 import org.scalatest.freespec.AnyFreeSpec

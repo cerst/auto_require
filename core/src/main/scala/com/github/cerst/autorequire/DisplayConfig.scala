@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package com.github.cerst.auto_require
+package com.github.cerst.autorequire
 
 /**
   * Sub-types of this trait change the error message generation of <i>auto_require</i> functions.

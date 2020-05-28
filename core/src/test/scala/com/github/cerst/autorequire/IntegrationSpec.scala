@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package com.github.cerst.auto_require
+package com.github.cerst.autorequire
 
 import io.estatico.newtype.macros.newtype
 import io.estatico.newtype.ops._

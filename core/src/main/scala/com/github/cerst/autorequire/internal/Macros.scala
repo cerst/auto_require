@@ -4,9 +4,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package com.github.cerst.auto_require.internal
+package com.github.cerst.autorequire.internal
 
-import com.github.cerst.auto_require.{DisplayConfig, InfixOnlyOperators, SimpleNameSegments, StripTypeNameSuffix}
+import com.github.cerst.autorequire.{DisplayConfig, InfixOnlyOperators, SimpleNameSegments, StripTypeNameSuffix}
 import com.github.ghik.silencer.silent
 
 import scala.reflect.macros.blackbox

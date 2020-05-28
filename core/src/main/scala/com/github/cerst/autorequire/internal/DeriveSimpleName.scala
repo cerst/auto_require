@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package com.github.cerst.auto_require.internal
+package com.github.cerst.autorequire.internal
 
 import scala.annotation.tailrec
 

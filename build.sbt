@@ -6,15 +6,15 @@ lazy val root = (project in file("."))
     // crossScalaVersions must be set to Nil on the aggregating project
     // https: //www.scala-sbt.org/1.x/docs/Cross-Build.html#Cross+building+a+project
     crossScalaVersions := Nil,
-    name := "auto_require-root"
+    name := "auto-require-root"
   )
 
 lazy val core = (project in file("core"))
   .settings(
-    ReleaseSettings.libraryOptimized("com.github.cerst.auto_require"),
+    ReleaseSettings.libraryOptimized("com.github.cerst.autorequire"),
     crossScalaVersions := CommonValues.crossScalaVersions,
     libraryDependencies ++= Dependencies.core(scalaVersion.value),
-    name := "auto_require",
+    name := "auto-require",
     scalacOptions ++= (CrossVersion.partialVersion(scalaVersion.value) match {
       // required for tests with newtype
       // https://github.com/estatico/scala-newtype

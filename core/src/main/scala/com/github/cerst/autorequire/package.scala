@@ -6,9 +6,9 @@
 
 package com.github.cerst
 
-import com.github.cerst.auto_require.internal.Macros
+import com.github.cerst.autorequire.internal.Macros
 
-package object auto_require {
+package object autorequire {
 
   /**
     * Tests the given `expression`, throwing an `IllegalArgumentException` if false.<br/>
