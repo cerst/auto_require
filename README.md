@@ -25,5 +25,5 @@ val _ = Person(10, "John")
 In order to display the error message above, the macro generates variable declarations for all variables found in the expression.     
 Whereas you can use _autoRequire_ everywhere, you always need to specify a generic type as the latter is displayed in the error message.   
 If you prefer not throwing exceptions, you can use _autoRequireEither_.  
-There are a few ways to customize the error message. Please check the Scaladoc _com.github.cerst.autorequire.DisplayConfig_
+There are a few ways to customize the error message. Please check the Scaladoc of _com.github.cerst.autorequire.DisplayConfig_
 and its sub-types for more info.
