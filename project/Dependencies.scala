@@ -5,10 +5,10 @@ object Dependencies {
   val additionalResolvers: Seq[Resolver] = Seq()
 
   private object Version {
-    val Newtype = "0.4.3"
+    val Newtype = "0.4.4"
     val Paradise = "2.1.1"
-    val Scalatest = "3.1.0"
-    val Silencer = "1.4.4"
+    val Scalatest = "3.2.0"
+    val Silencer = "1.6.0"
   }
 
   // comment licenses for dependencies using the SPDX short identifier (see e.g. https://opensource.org/licenses/Apache-2.0)
