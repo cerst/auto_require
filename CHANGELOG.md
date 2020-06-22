@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.3.2
+* Update the build
+
 ## 0.3.1
 * Fix an incorrect macro assumption which treated unary methods as field selections thus printing the respective tree 
   instead further deconstructing it (e.g. 'name.nonEmpty' resulted in a printed variable 
