@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.1
+* Fix an incorrect macro assumption which treated unary methods as field selections thus printing the respective tree 
+  instead further deconstructing it (e.g. 'name.nonEmpty' resulted in a printed variable 
+  'scala.Predef.augmentString(name).nonEmpty = true' instead of only printing the name)
+
 ## 0.3.0
 * Change artifact name to _auto-require_ ('-' rather than '_')
 * Change package name to _autorequire_ (remove '_')

@@ -69,7 +69,7 @@ final class Macros(val c: blackbox.Context) {
       }
       Result(pretty, recvResult.declarations ++ argsDecls, (recvResult.debugs ++ argsDebugs), precedence)
 
-    // supported unary methods
+    // pretty-print supported unary method "!"
     case q"$recv.$unary" if unary == TermName("unary_$bang") =>
       val recvResult = process(recv)
       // precedence >= is incorrect here because '!!x' is not a valid expression
@@ -77,13 +77,26 @@ final class Macros(val c: blackbox.Context) {
         if (recvResult.precedence > Precedence.Not) "!" + recvResult.pretty else "!(" + recvResult.pretty + ")"
       Result(pretty, recvResult.declarations, recvResult.debugs, Precedence.Not)
 
-    // field selection or unsupported unary method
-    // in case of the former, de-constructing the receiver further does not work and shouldn't be needed
-    case q"$recv.$fieldOrUnary" =>
-      val evaluated = q"$recv.$fieldOrUnary"
-      val pretty = showCode(evaluated)
-      val (declaration, debug) = refDeclDebug(evaluated, pretty)
-      Result(pretty, List(declaration), List(debug), Precedence.FieldSelection)
+    // other unary method
+    // TODO: is there a better way to distinguish methods and values?
+    case q"$recv.$unary" if tree.symbol.toString startsWith "method" =>
+      val recvResult = process(recv)
+      val pretty = recvResult.pretty + "." + showCode(q"$unary")
+      Result(pretty, recvResult.declarations, recvResult.debugs, Precedence.FieldSelectionOrUnaryMethod)
+
+    // field selection
+    // de-constructing the receiver further does not work and shouldn't be needed
+    case q"$recv.$field" =>
+      val pretty = showCode(tree)
+      val (declarations, debugs) = {
+        if (pretty == "scala.Predef") {
+          (List.empty, List.empty)
+        } else {
+          val (declaration, debug) = refDeclDebug(tree, pretty)
+          (List(declaration), List(debug))
+        }
+      }
+      Result(pretty, declarations, debugs, Precedence.FieldSelectionOrUnaryMethod)
 
     // literal constants (e.g. '10')
     case Literal(_) =>

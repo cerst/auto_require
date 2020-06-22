@@ -10,7 +10,7 @@ object Precedence {
   final val Identifier = 6
   final val LiteralConstant = 6
   final val Object = 6
-  final val FieldSelection = 6
+  final val FieldSelectionOrUnaryMethod = 6
   final val NonInfixMethod = 6
   final val Not = 5
   /** e.g.: >, >=, <, <= */

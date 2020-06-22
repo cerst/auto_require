@@ -88,11 +88,25 @@ final class MacrosSpec extends AnyFreeSpec with TypeCheckedTripleEquals with Eit
     assert(actual.left.value === expected)
   }
 
+  "autoRequire with scala.Predef" in {
+    val name = ""
+    val actual = autoRequireEither[Person](name.nonEmpty)
+    val expected = """Requirement failed for 'Person': 'scala.Predef.augmentString(name).nonEmpty' { name =  }"""
+    assert(actual.left.value === expected)
+  }
+
+  "autoRequire with negative, numeric values" in {
+    val age = -2
+    val actual = autoRequireEither[Person](age > -1)
+    val expected = """Requirement failed for 'Person': 'age > -1' { age = -2 }"""
+    assert(actual.left.value === expected)
+  }
+
 }
 
 private object MacrosSpec {
 
-  final case class Person(age: Int, birthday: Instant)
+  final case class Person(age: Int, birthday: Instant, name: String)
 
   final class NestedInstantOps(val instant: Instant) extends AnyVal {
     def >(that: Instant): Boolean = instant.compareTo(that) > 0
