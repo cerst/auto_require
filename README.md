@@ -15,11 +15,11 @@ libraryDependencies ++= Seq(
 import com.github.cerst.autorequire._
 
 final case class Person(age: Int, name: String) {
-    autoRequire[Person](age >= 14 && name.nonEmpty)
+    autoRequire[Person](!(age < 14) && name.nonEmpty)
 }
 
 val _ = Person(10, "John")
-// Exception in thread "main" [...]: Requirement failed for 'Person': 'Person.this.age >= 14 && scala.Predef.augmentString(Person.this.name).nonEmpty' { Person.this.age = 10, scala.Predef.augmentString(Person.this.name).nonEmpty = true }
+// Exception in thread "main" [...]: Requirement failed for 'Person': '!(Person.this.age < 13) && scala.Predef.augmentString(Person.this.name).nonEmpty' { Person.this.age = 10, Person.this.name = John }
 ````
 
 In order to display the error message above, the macro generates variable declarations for all variables found in the expression.     
