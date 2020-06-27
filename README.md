@@ -15,7 +15,7 @@ libraryDependencies ++= Seq(
 import com.github.cerst.autorequire._
 
 final case class Person(age: Int, name: String) {
-    autoRequire[Person](!(age < 14) && name.nonEmpty)
+    autoRequire[Person](!(age < 13) && name.nonEmpty)
 }
 
 val _ = Person(10, "John")
