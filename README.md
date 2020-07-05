@@ -1,4 +1,7 @@
-# auto_require
+[![GitHub license](https://img.shields.io/github/license/cerst/auto_require)](https://github.com/cerst/auto_require/blob/master/LICENSE)
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.cerst/auto-require_2.13)](https://search.maven.org/search?q=g:com.github.cerst%20AND%20a:auto-require*)
+
+# auto-require
 
 _auto\_require_ is a macro implementation of Scala's require that comes with auto-generated error messages.  
 It has no dependencies other than _scala-reflect_.
