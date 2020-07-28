@@ -8,7 +8,7 @@ object Dependencies {
     val Newtype = "0.4.4"
     val Paradise = "2.1.1"
     val Scalatest = "3.2.0"
-    val Silencer = "1.6.0"
+    val Silencer = "1.7.1"
   }
 
   // comment licenses for dependencies using the SPDX short identifier (see e.g. https://opensource.org/licenses/Apache-2.0)
