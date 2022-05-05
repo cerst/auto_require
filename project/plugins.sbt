@@ -22,7 +22,7 @@ addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.9.5")
 
 // https://github.com/DavidGregory084/sbt-tpolecat
 // automatically sets valuable compiler flags
-addSbtPlugin("io.github.davidgregory084" % "sbt-tpolecat" % "0.1.16")
+// addSbtPlugin("io.github.davidgregory084" % "sbt-tpolecat" % "0.1.16")
 
 // https://github.com/rtimush/sbt-updates
 // check for new releases of plugins and dependencies
@@ -31,5 +31,3 @@ addSbtPlugin("io.github.davidgregory084" % "sbt-tpolecat" % "0.1.16")
 // useful commands
 //    dependencyUpdates - list possible updates
 addSbtPlugin("com.timushev.sbt" % "sbt-updates" % "0.5.1")
-
-addSbtPlugin("ch.epfl.lamp" % "sbt-dotty" % "0.5.1")

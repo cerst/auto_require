@@ -4,37 +4,15 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-package com.github.cerst
+package com.github.cerst.autorequire
 
-import com.github.cerst.autorequire.internal.Macros
+inline def autoRequireEither[A](
+  inline expression: Boolean,
+  inline displayConfigEntries: DisplayConfigEntry[A]*
+): Either[String, Unit] = {
+  ${ internal.autoRequireEitherImpl[A]('expression, 'displayConfigEntries) }
+}
 
-package object autorequire {
-
-  /**
-    * Tests the given `expression`, throwing an `IllegalArgumentException` if false.<br/>
-    * In contrast to Scala's standard `require`, error messages are generated automatically.
-    *
-    * @param expression The expression to test.
-    * @param overrides  Allows for customizing the auto-generated error message. Check `DisplayConfig` and its sub-types
-    *                   for more info.
-    * @tparam A Used to generate a context name as part of the error message. Must not be `Nothing`.
-    * @return `Unit` if and only if the given `expression` is true. Throws an `IllegalArgumentException` otherwise.
-    */
-  @throws[IllegalArgumentException]
-  def autoRequire[A](expression: Boolean, overrides: DisplayConfig*): Unit =
-    macro Macros.autoRequire[A]
-
-  /**
-   * Tests the given `expression`, returning a `Left` containing an error message if false.<br/>
-   * In contrast to Scala's standard `require`, error messages are generated automatically.
-   *
-   * @param expression The expression to test.
-   * @param overrides  Allows for customizing the auto-generated error message. Check `DisplayConfig` and its sub-types
-   *                   for more info.
-   * @tparam A Used to generate a context name as part of the error message. Must not be `Nothing`.
-   * @return `Left` if and only if the given `expression` is true. `Right`
-   */
-  def autoRequireEither[A](expression: Boolean, overrides: DisplayConfig*): Either[String, Unit] =
-    macro Macros.autoRequireEither[A]
-
+inline def autoRequire[A](inline expression: Boolean, inline displayConfigEntries: DisplayConfigEntry[A]*): Unit = {
+  ${ internal.autoRequireImpl[A]('expression, 'displayConfigEntries) }
 }
